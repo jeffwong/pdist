@@ -1,0 +1,14 @@
+Package: pdist
+Type: Package
+Title: Partitioned Distance Function
+Version: 1.0
+Date: 2011-06-18
+Author: Jeffrey Wong
+Maintainer: <jeff.ct.wong@gmail.com>
+Description: Computes the euclidean distance between rows of a matrix X
+  and rows of another matrix Y.  Previously, this could only be done by
+  binding the two matrices together and calling 'dist', but this creates
+  unnecessary computation by computing the distances between a row of X
+  and another row of X, and likewise for Y.
+License: GPL
+LazyLoad: yes
