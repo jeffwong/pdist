@@ -1,4 +1,9 @@
-pdist = function(X, Y) {
+pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
+  if (is.null(Y)) {
+      Y = X[indices.B,]
+      X = X[indices.A,]
+  }
+  
   if(!is.matrix(X)) X = as.matrix(X)
   if(!is.matrix(Y)) Y = as.matrix(Y)
 
