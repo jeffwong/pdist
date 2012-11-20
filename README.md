@@ -4,7 +4,7 @@ Given a matrix X with m observations and another matrix Y with n observations, P
 the m by n distance matrix.  A rectangular distance matrix can be more appropriate than a square
 matrix in many applications; for example, in bipartite graphs we might be concerned with the distance between
 objects in Graph A with objects in Graph B, but we may not care about the distance between objects within
-Graph or Graph B.  Currently, R only has a `dist` function which returns square distance matrices.
+Graph A or Graph B.  Currently, R only has a `dist` function which returns square distance matrices.
 
 ##Performance 
 `pdist` is a slightly optimized version of the native `dist` function; distances are not computed between
