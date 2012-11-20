@@ -14,3 +14,9 @@ matrix, yielding m^2 + mn + n^2 unnecessary distance computations.  If the matri
 the distance metric is the Euclidean metric, then p(m^2 + mn + n^2) unnecessary flops are made.  More complex
 metrics, such as dynamic time warping, can run in O(p^3), which means a naive dist function would make
 O(p^3(m^2 + mn + n^2)) unnecessary flops!
+
+##Timing
+Using a matrix X that is 1000 by 100, it took 0.543 seconds to compute the distance matrix based on
+the Euclidean metric using `dist`.  Using pdist, the timing was the same.  If we are interested in
+the subset A taken by the first 100 rows of X, and subset B taken by the next 100 rows of X, we can
+compute a smaller distance matrix in only 0.006 seconds!
