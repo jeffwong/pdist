@@ -6,7 +6,13 @@ float dist(float* x, float *y, int nx, int ny, int p)
   float distance = 0;
   for(int i = 0; i < p; i++)
   {
-    float diff = x[i*nx] - y[i*ny]; //i*nx is the ith feature of the nxth row
+    //i*nx is the ith feature of the nxth row
+    float xi = x[i*nx];
+    float yi = y[i*ny];
+    if (isnan(xi) || isnan(yi)) {
+        continue;
+    }
+    float diff = xi - yi;
     distance += (diff*diff);
   }
   return sqrt(distance);

@@ -16,6 +16,7 @@ pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
 
   distances = single(nrow(X) * nrow(Y))
 
-  result = .C("Rpdist", X.vec, Y.vec, nx, ny, p, distances=distances)
+  result = .C("Rpdist", X.vec, Y.vec, nx, ny, p, distances=distances,
+              NAOK = T)
   matrix(result$distances, nrow(X), nrow(Y), byrow=T)
 }
