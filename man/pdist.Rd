@@ -41,7 +41,7 @@
   x.pdist = pdist(x, indices.A = 1:3, indices.B = 8:10)
   message("Find the distance between observation 1 and 10 of x")
   x.pdist[1,3]
-  message("Convert a pdist object into a traditional distance matrix")
+  message("Converting a pdist object into a traditional distance matrix")
   as.matrix(x.pdist)
 }
 }

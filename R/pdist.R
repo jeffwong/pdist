@@ -26,7 +26,7 @@
 #'   x.pdist = pdist(x, indices.A = 1:3, indices.B = 8:10)
 #'   message("Find the distance between observation 1 and 10 of x")
 #'   x.pdist[1,3]
-#'   message("Convert a pdist object into a traditional distance matrix")
+#'   message("Converting a pdist object into a traditional distance matrix")
 #'   as.matrix(x.pdist)
 #' }
 #' @export
@@ -71,10 +71,15 @@ setClass("pdist", representation(dist = "numeric",
                                  p = "numeric"),
          S3methods = T)
 
+
 setMethod("[", "pdist", function(x, i, j, ...) {
   if (missing(j)) j = 1:x@p
   x@dist[(i - 1) * x@p + j]
 })
-setMethod("as.matrix", "pdist", function(x, ...) {
-  matrix(x@dist, x@n, x@p, byrow=T)
-})
+
+#setMethod("as.matrix", "pdist", function(x, ...) {
+#  matrix(x@dist, x@n, x@p, byrow=T)
+#})
+
+#' @export
+as.matrix.pdist = function(x, ...) matrix(x@dist, x@n, x@p, byrow=T)
