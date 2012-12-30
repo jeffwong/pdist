@@ -1,42 +1,48 @@
 \name{pdist}
 \alias{pdist}
-\title{
-Partitioned Distance Function
-}
-\description{
-Compute the distances between rows of X and rows of Y
-}
+\title{Partitioned Distances}
 \usage{
-pdist(X, Y)
+  pdist(X, Y = NULL, indices.A = NULL, indices.B = NULL)
 }
 \arguments{
-  \item{X}{
-A data matrix where each row is an observation
+  \item{X}{a matrix of n observations where columns
+  represent features of the observations}
+
+  \item{Y}{optional.  A second matrix of p observations
+  like X}
+
+  \item{indices.A}{optional.  A vector of integers
+  representing row indices from X}
+
+  \item{indices.B}{optional.  A vector of integers
+  representing row indices from X}
 }
-  \item{Y}{
-A data matrix where each row is an observation
-}
+\description{
+  Compute distance matrix between two matrices of
+  observations, or two subsets of one matrix
 }
 \details{
-Calls a C implementation to calculate the euclidean distance between
-the rows of X and the rows of Y.
-}
-\value{
-A matrix where the ij-th value is the distance between row i of matrix X
-and row j of matrix Y.
-}
-\references{
-}
-\author{
-Jeffrey Wong
-}
-\note{
-}
-
-\seealso{
+  pdist computes a n by p distance matrix using two
+  seperate matrices.  pdist allows the user to factor out
+  observations into seperate matrices to improve
+  computations.  The function dist computes the distances
+  between all possible pair wise elements, pdist only
+  computes the distance between observations in X with
+  observations in Y; distances between observations in X
+  and other observations in X are not computed and likewise
+  for Y.  If a second matrix Y is not provided, indices.A
+  and indices.B can be provided together to specify subsets
+  of X to be computed.  A new matrix X is created by taking
+  X[indices.A,] and Y is created using X[indices.B,]
 }
 \examples{
-X = matrix(1:9,3,3)
-pdist(X,X)
+{
+  x = matrix(rnorm(100),10,10)
+  x.pdist = pdist(x, indices.A = 1:3, indices.B = 8:10)
+  message("Find the distance between observation 1 and 10 of x")
+  x.pdist[1,3]
+  message("Convert a pdist object into a traditional distance matrix")
+  as.matrix(x.pdist)
 }
-\keyword{ dist }
+}
+

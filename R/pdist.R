@@ -1,12 +1,45 @@
+#' Partitioned Distances
+#'
+#' Compute distance matrix between two matrices of observations,
+#' or two subsets of one matrix
+#'
+#' @param X a matrix of n observations where columns represent features
+#'    of the observations
+#' @param Y optional.  A second matrix of p observations like X
+#' @param indices.A optional.  A vector of integers representing
+#'    row indices from X 
+#' @param indices.B optional.  A vector of integers representing
+#'    row indices from X
+#' @details pdist computes a n by p distance matrix using two seperate
+#'    matrices.  pdist allows the user to factor out observations into
+#'    seperate matrices to improve computations.  The function dist
+#'    computes the distances between all possible pair wise elements,
+#'    pdist only computes the distance between observations in X with
+#'    observations in Y; distances between observations in X and other
+#'    observations in X are not computed and likewise for Y.  If a second
+#'    matrix Y is not provided, indices.A and indices.B can be provided
+#'    together to specify subsets of X to be computed.  A new matrix X
+#'    is created by taking X[indices.A,] and Y is created using
+#'    X[indices.B,]
+#' @examples {
+#'   x = matrix(rnorm(100),10,10)
+#'   x.pdist = pdist(x, indices.A = 1:3, indices.B = 8:10)
+#'   message("Find the distance between observation 1 and 10 of x")
+#'   x.pdist[1,3]
+#'   message("Convert a pdist object into a traditional distance matrix")
+#'   as.matrix(x.pdist)
+#' }
+#' @export
+#' @useDynLib pdist
 pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
   if (!is.null(Y)) {
-      if (X == Y) return (as.matrix(dist(X, upper=T)))
+      if (X == Y) return (dist(X))
   }
   else {
     if (is.null(indices.A) & is.null(indices.B))
-      return (as.matrix(dist(X, upper=T)))
+      return (dist(X))
     if (length(indices.A) == nrow(X) & length(indices.B) == nrow(X))
-      return (as.matrix(dist(X, upper=T)))
+      return (dist(X))
   }
    
   if (is.null(Y) & (!is.null(indices.A) & !is.null(indices.B))) {
@@ -30,13 +63,18 @@ pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
 
   result = .C("Rpdist", X.vec, Y.vec, nx, ny, p, distances=distances,
               NAOK = T)
-  structure(list(dist = result$distances, 
-                 n = nrow(X),
-                 p = nrow(Y)), class = "pdist")
+  new("pdist", dist = result$distances, n = nrow(X), p = nrow(Y))
 }
 
-setClass("pdist", representation = "list", S3methods = T)
+setClass("pdist", representation(dist = "numeric",
+                                 n = "numeric",
+                                 p = "numeric"),
+         S3methods = T)
 
-as.matrix.pdist = function(x) {
-  matrix(x$dist, x$n, x$p, byrow=T)
-}
+setMethod("[", "pdist", function(x, i, j, ...) {
+  if (missing(j)) j = 1:x@p
+  x@dist[(i - 1) * x@p + j]
+})
+setMethod("as.matrix", "pdist", function(x, ...) {
+  matrix(x@dist, x@n, x@p, byrow=T)
+})

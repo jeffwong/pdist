@@ -13,13 +13,13 @@ and rows of a matrix block Y.
 Package: \tab pdist\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
-Date: \tab 2011-06-18\cr
+Date: \tab 2012-12-28\cr
 License: \tab GPL\cr
 LazyLoad: \tab yes\cr
 }
 }
 \author{
-Jeffrey Wong <jeff.ct.wong@stanford.edu>
+Jeffrey Wong <jeff.ct.wong@gmail.com>
 }
 \references{
 }

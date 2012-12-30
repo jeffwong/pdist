@@ -1,2 +1,2 @@
+export(pdist)
 useDynLib(pdist)
-exportPattern("^[[:alpha:]]+")
