@@ -14,5 +14,8 @@ Description: Computes the euclidean distance between rows of a matrix X
     computations significantly faster.
 License: GPL
 LazyLoad: yes
+Depends:
+    methods
 Collate:
     'pdist.R'
+    'setup.R'

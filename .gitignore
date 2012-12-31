@@ -1,2 +1,3 @@
 src/pdist.o
 src/pdist.so
+src/symbols.rds

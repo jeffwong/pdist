@@ -64,22 +64,5 @@ pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
   result = .C("Rpdist", X.vec, Y.vec, nx, ny, p, distances=distances,
               NAOK = T)
   new("pdist", dist = result$distances, n = nrow(X), p = nrow(Y))
+  #structure(list(dist = result$distances, n = nrow(X), p = nrow(Y)), class="pdist")
 }
-
-setClass("pdist", representation(dist = "numeric",
-                                 n = "numeric",
-                                 p = "numeric"),
-         S3methods = T)
-
-
-setMethod("[", "pdist", function(x, i, j, ...) {
-  if (missing(j)) j = 1:x@p
-  x@dist[(i - 1) * x@p + j]
-})
-
-#setMethod("as.matrix", "pdist", function(x, ...) {
-#  matrix(x@dist, x@n, x@p, byrow=T)
-#})
-
-#' @export
-as.matrix.pdist = function(x, ...) matrix(x@dist, x@n, x@p, byrow=T)
