@@ -20,7 +20,3 @@ Using a matrix X that is 1000 by 100, it took 0.543 seconds to compute the dista
 the Euclidean metric using `dist`.  Using pdist, the timing was the same.  If we are interested in
 the subset A taken by the first 100 rows of X, and subset B taken by the next 100 rows of X, we can
 compute a smaller distance matrix in only 0.006 seconds!
-
-The kNNImpute function of my [imputation](https://github.com/jeffwong/imputation) package
-is an example where `pdist` greatly accelerates the calculation of distance matrices, making
-k nearest neighbors imputation an order of magnitude faster than with a naive `dist` function!

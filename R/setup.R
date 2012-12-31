@@ -18,6 +18,7 @@ setMethod("[", "pdist", function(x, i, j, ...) {
 #'
 #' pdist objects are numeric arrays, converts this to matrix
 #' @param x an instance of class pdist
+#' @param ... additional arguments for as.matrix signature; currently not used
 #' @method as.matrix pdist
 #' @S3method as.matrix pdist
-as.matrix.pdist = function(x) matrix(x@dist, x@n, x@p, byrow=T)
+as.matrix.pdist = function(x, ...) matrix(x@dist, x@n, x@p, byrow=T)
