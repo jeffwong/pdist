@@ -1,5 +1,7 @@
 #Partitioned Distances
 
+[pdist on CRAN](http://cran.r-project.org/web/packages/pdist/index.html)
+
 Given a matrix X with m observations and another matrix Y with n observations, Partitioned Distances computes
 the m by n distance matrix.  A rectangular distance matrix can be more appropriate than a square
 matrix in many applications; for example, in bipartite graphs we might be concerned with the distance between
