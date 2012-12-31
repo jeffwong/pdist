@@ -21,14 +21,13 @@
 #'    together to specify subsets of X to be computed.  A new matrix X
 #'    is created by taking X[indices.A,] and Y is created using
 #'    X[indices.B,]
-#' @examples {
+#' @examples
 #'   x = matrix(rnorm(100),10,10)
 #'   x.pdist = pdist(x, indices.A = 1:3, indices.B = 8:10)
 #'   message("Find the distance between observation 1 and 10 of x")
 #'   x.pdist[1,3]
 #'   message("Converting a pdist object into a traditional distance matrix")
 #'   as.matrix(x.pdist)
-#' }
 #' @export
 #' @useDynLib pdist
 pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
@@ -64,5 +63,4 @@ pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
   result = .C("Rpdist", X.vec, Y.vec, nx, ny, p, distances=distances,
               NAOK = T)
   new("pdist", dist = result$distances, n = nrow(X), p = nrow(Y))
-  #structure(list(dist = result$distances, n = nrow(X), p = nrow(Y)), class="pdist")
 }

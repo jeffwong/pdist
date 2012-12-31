@@ -3,6 +3,12 @@ setClass("pdist", representation(dist = "numeric",
                                  p = "numeric"),
          S3methods = T)
 
+#' extract parts of pdist
+#'
+#' @name [
+#' @aliases [,pdist-method
+#' @docType methods
+#' @rdname extract-methods
 setMethod("[", "pdist", function(x, i, j, ...) {
   if (missing(j)) j = 1:x@p
   x@dist[(i - 1) * x@p + j]
@@ -11,8 +17,7 @@ setMethod("[", "pdist", function(x, i, j, ...) {
 #' Convert pdist to a distance matrix
 #'
 #' pdist objects are numeric arrays, converts this to matrix
-#' @param x
-#' @param ...
+#' @param x an instance of class pdist
 #' @method as.matrix pdist
 #' @S3method as.matrix pdist
-as.matrix.pdist = function(x, ...) matrix(x@dist, x@n, x@p, byrow=T)
+as.matrix.pdist = function(x) matrix(x@dist, x@n, x@p, byrow=T)
