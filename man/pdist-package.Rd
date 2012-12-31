@@ -6,7 +6,8 @@ Distances between Observations for a Partitioned Matrix
 }
 \description{
 Computes the distances between rows of a matrix block X
-and rows of a matrix block Y.
+and rows of a matrix block Y.  Much faster than dist for certain
+use cases.
 }
 \details{
 \tabular{ll}{
@@ -21,10 +22,4 @@ LazyLoad: \tab yes\cr
 \author{
 Jeffrey Wong <jeff.ct.wong@gmail.com>
 }
-\references{
-}
 \keyword{ package }
-\seealso{
-}
-\examples{
-}

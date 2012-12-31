@@ -16,11 +16,18 @@
 #'    computes the distances between all possible pair wise elements,
 #'    pdist only computes the distance between observations in X with
 #'    observations in Y; distances between observations in X and other
-#'    observations in X are not computed and likewise for Y.  If a second
-#'    matrix Y is not provided, indices.A and indices.B can be provided
-#'    together to specify subsets of X to be computed.  A new matrix X
-#'    is created by taking X[indices.A,] and Y is created using
-#'    X[indices.B,]
+#'    observations in X are not computed and likewise for Y.
+#'
+#'    If a second matrix Y is not provided, indices.A and indices.B
+#'    can be provided together to specify subsets of X to be computed.
+#'    A new matrix X is created by taking X[indices.A,] and Y is
+#'    created using X[indices.B,].
+#'    
+#'    The return value of pdist is a distance vector, much like the default
+#'    return value for dist.  However, it can be accessed like a full
+#'    distance matrix.  If mypdist = pdist(X,Y), mypdist[i,j] is the
+#'    distance between X[i,] and Y[j,].  Similarly, mypdist[i,] is a
+#'    vector of distances between X[i,] and all observations in Y.
 #' @examples
 #'   x = matrix(rnorm(100),10,10)
 #'   x.pdist = pdist(x, indices.A = 1:3, indices.B = 8:10)
