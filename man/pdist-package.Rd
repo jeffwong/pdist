@@ -12,7 +12,7 @@ and rows of a matrix block Y.
 \tabular{ll}{
 Package: \tab pdist\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 1.1\cr
 Date: \tab 2012-12-28\cr
 License: \tab GPL\cr
 LazyLoad: \tab yes\cr
