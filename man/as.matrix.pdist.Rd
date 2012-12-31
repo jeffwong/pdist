@@ -2,7 +2,7 @@
 \alias{as.matrix.pdist}
 \title{Convert pdist to a distance matrix}
 \usage{
-  as.matrix.pdist(x, ...)
+  \method{as.matrix}{pdist} (x, ...)
 }
 \arguments{
   \item{x}{}
