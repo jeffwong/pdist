@@ -39,7 +39,8 @@
 #' @useDynLib pdist
 pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
   if (!is.null(Y)) {
-      if (X == Y) return (dist(X))
+    if ( all(dim(X) == dim(Y)) )
+      if ( all(X == Y) ) return (dist(X))
   }
   else {
     if (is.null(indices.A) & is.null(indices.B))
