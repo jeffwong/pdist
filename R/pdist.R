@@ -7,9 +7,9 @@
 #'    of the observations
 #' @param Y optional.  A second matrix of p observations like X
 #' @param indices.A optional.  A vector of integers representing
-#'    row indices from X 
+#'    row indices from X.  This should only be used when Y is not provided. 
 #' @param indices.B optional.  A vector of integers representing
-#'    row indices from X
+#'    row indices from X.  This should only be used when Y is not provided.
 #' @details pdist computes a n by p distance matrix using two seperate
 #'    matrices.  pdist allows the user to factor out observations into
 #'    seperate matrices to improve computations.  The function dist
@@ -39,8 +39,7 @@
 #' @useDynLib pdist
 pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
   if (!is.null(Y)) {
-    if ( all(dim(X) == dim(Y)) )
-      if ( all(X == Y) ) return (dist(X))
+    if (identical(X,Y)) warning("Y is the same as X, did you mean to use dist instead?")
   }
   else {
     if (is.null(indices.A) & is.null(indices.B))
