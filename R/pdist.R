@@ -5,7 +5,8 @@
 #'
 #' @param X a matrix of n observations where columns represent features
 #'    of the observations
-#' @param Y optional.  A second matrix of p observations like X
+#' @param Y optional.  A second matrix of p observations like X.  Y
+#'    must have the same number of columns as X
 #' @param indices.A optional.  A vector of integers representing
 #'    row indices from X.  This should only be used when Y is not provided. 
 #' @param indices.B optional.  A vector of integers representing
@@ -16,7 +17,7 @@
 #'    computes the distances between all possible pair wise elements,
 #'    pdist only computes the distance between observations in X with
 #'    observations in Y; distances between observations in X and other
-#'    observations in X are not computed and likewise for Y.
+#'    observations in X are not computed, and likewise for Y.
 #'
 #'    If a second matrix Y is not provided, indices.A and indices.B
 #'    can be provided together to specify subsets of X to be computed.
@@ -42,10 +43,16 @@ pdist = function(X, Y = NULL, indices.A = NULL, indices.B = NULL) {
     if (identical(X,Y)) warning("Y is the same as X, did you mean to use dist instead?")
   }
   else {
-    if (is.null(indices.A) & is.null(indices.B))
+    if (is.null(indices.A) & is.null(indices.B)) {
+      warning("Not enough parameters specified: at least Y, or both indices.A and
+               indices.B must be specified.  Returning dist(X) instead.")
       return (dist(X))
-    if (length(indices.A) == nrow(X) & length(indices.B) == nrow(X))
-      return (dist(X))
+    }
+    if (length(indices.A) == nrow(X) & length(indices.B) == nrow(X)) {
+      warning("indices.A and indices.B should be used to make subsets of X.
+               This configuration will compute the distance between all pairs
+               of rows in X.")
+    }
   }
    
   if (is.null(Y) & (!is.null(indices.A) & !is.null(indices.B))) {
