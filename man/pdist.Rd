@@ -9,13 +9,15 @@
   represent features of the observations}
 
   \item{Y}{optional.  A second matrix of p observations
-  like X}
+  like X.  Y must have the same number of columns as X}
 
   \item{indices.A}{optional.  A vector of integers
-  representing row indices from X}
+  representing row indices from X.  This should only be
+  used when Y is not provided.}
 
   \item{indices.B}{optional.  A vector of integers
-  representing row indices from X}
+  representing row indices from X.  This should only be
+  used when Y is not provided.}
 }
 \description{
   Compute distance matrix between two matrices of
@@ -29,8 +31,8 @@
   between all possible pair wise elements, pdist only
   computes the distance between observations in X with
   observations in Y; distances between observations in X
-  and other observations in X are not computed and likewise
-  for Y.
+  and other observations in X are not computed, and
+  likewise for Y.
 
   If a second matrix Y is not provided, indices.A and
   indices.B can be provided together to specify subsets of
