@@ -10,10 +10,10 @@ setClass("pdist", representation(dist = "numeric",
 #' @docType methods
 #' @rdname extract-methods
 setMethod("[", "pdist", function(x, i, j, ...) {
-  if (j > x@p | j < 1) stop("index j out of bounds")
-  if (i > x@n | i < 1) stop("index i out of bounds")
-  if (missing(j)) j = 1:x@p
-  x@dist[(i - 1) * x@p + j]
+    if (i > x@n | i < 1) stop("index i out of bounds")
+    if (missing(j)) j = 1:x@p
+    else if (j > x@p | j < 1) stop("index j out of bounds")
+    x@dist[(i - 1) * x@p + j]
 })
 
 #' @method as.matrix pdist
